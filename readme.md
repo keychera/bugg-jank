@@ -11,7 +11,7 @@ small explanation about the tasks:
 
 the detailed error is inside comments of one of the files in respective src folders
 ```sh
-bb jank
+bb jank :args bb-jank!
 
 # bug 1, which I assumed caused by using binding name the same name as a cpp type
 bb jank :bug 1 # codegen error
