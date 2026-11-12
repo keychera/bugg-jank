@@ -1,8 +1,13 @@
 # buggy jank
 
 need 
-- babashka
-- jank from commit [3b7ffc220fb8c65eecf4e777bfcc8e5252d30fb3](https://github.com/jank-lang/jank/commit/3b7ffc220fb8c65eecf4e777bfcc8e5252d30fb3) , 
+- babashka, at least v1.13.222
+- jank, at least from commit [3b7ffc220fb8c65eecf4e777bfcc8e5252d30fb3](https://github.com/jank-lang/jank/commit/3b7ffc220fb8c65eecf4e777bfcc8e5252d30fb3) 
+
+small explanation about the tasks:
+`bb jank` is a bb script that builds `jank run-main` command
+`bb compile` is a bb script that builds `jank compile` command
+both task receive `:bug` flag accepting integer, this will select which alias to use from deps.edn
 
 the detailed error is inside comments of one of the files in respective src folders
 ```sh
