@@ -1,7 +1,5 @@
 {:paths ["."]
- :tasks {prep     {:task (exec 'build.lets/prep)}
-         jank     {:task (exec 'build.lets/jank)}
-         repl-dev {:task (exec 'build.lets/repl-dev)}
+ :tasks {jank     {:task (exec 'build.lets/jank)}
          compile  {:task (exec 'build.lets/compile-jank)}
          lets (let [[action] *command-line-args*]
                 (exec (symbol "build.lets" action)))}}
