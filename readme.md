@@ -20,6 +20,8 @@ bb jank :bug 1 # codegen error
 # bug 2, which I assume include extra.hpp twice makes the c header libs have double implementation
 # this was found because I was using this C header-only lib: https://github.com/prideout/par/blob/master/par_streamlines.h
 # and I tried to mimic the usage of that lib with this setup
+
+# verdict+ not a bug: this kind of C header-only lib that has impl need special treatment
 bb jank :bug 2 # this will work fine
 bb compile :bug 2 # this compiles error 
 
