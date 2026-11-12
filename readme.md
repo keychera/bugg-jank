@@ -13,10 +13,10 @@ the detailed error is inside comments of one of the files in respective src fold
 ```sh
 bb jank
 
-# bug 1
+# bug 1, which I assumed caused by using binding name the same name as a cpp type
 bb jank :bug 1 # codegen error
 
-# bug 2
+# bug 2, which I assume include extra.hpp twice makes the c header libs have double implementation
 bb jank :bug 2 # this will work fine
 bb compile :bug 2 # this compiles error 
 ```
