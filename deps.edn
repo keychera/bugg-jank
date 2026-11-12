@@ -5,5 +5,5 @@
            :bug-1 {:extra-paths ["src-bug1"]}
            :bug-2 {:jank {:extras ["-DSOME_HEADER_ONLY_CLIB_H_IMPL"]}
                    :extra-paths ["src-bug2"]}
-           :bug-3 {:jank {:extras ["-DSOME_HEADER_ONLY_CLIB_H_IMPL"]}
-                   :extra-paths ["src-bug3"]}}}
+           :bug-3 {:extra-paths ["src-bug3"]
+                   :jank {:main-module bermain.bug3}}}}

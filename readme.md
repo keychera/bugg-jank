@@ -15,19 +15,19 @@ the detailed error is inside comments of one of the files in respective src fold
 bb jank :args bb-jank!
 
 # bug 1, which I assumed caused by using binding name the same name as a cpp type
+
+# verdict: low prio
 bb jank :bug 1 # codegen error
 
 # bug 2, which I assume include extra.hpp twice makes the c header libs have double implementation
 # this was found because I was using this C header-only lib: https://github.com/prideout/par/blob/master/par_streamlines.h
 # and I tried to mimic the usage of that lib with this setup
 
-# verdict+ not a bug: this kind of C header-only lib that has impl need special treatment
+# verdict: not a bug: this kind of C header-only lib that has impl need special treatment
 bb jank :bug 2 # this will work fine
 bb compile :bug 2 # this compiles error 
 
-# bug 3 is the same as bug 2 codewise, but the extra.hpp is only included once in file bug3.jank
-# and this is also the same as bug 2, can be run with run-main, but not aot-compile (different error)
-# so it's a catch 22, and refactor the c/cpp sources is the only way out for bug-2 and bug-3
+# bug 3: this is still a bug, including once "fakeSDL.h" anywhere make run-main works, but not compile
 bb jank :bug 3 # this will work fine
 bb compile :bug 3 # this compiles error 
 ```

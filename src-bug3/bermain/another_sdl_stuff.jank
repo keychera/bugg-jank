@@ -1,0 +1,4 @@
+(ns bermain.another-sdl-stuff)
+
+(defn do-another-sdl-stuff []
+  (println "wow, another fake sdl stuff!" (cpp/fakeRender)))
