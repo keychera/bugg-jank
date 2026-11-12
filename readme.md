@@ -15,7 +15,7 @@ the detailed error is inside comments of one of the files in respective src fold
 bb jank :args bb-jank! # just hello world
 ```
 
-# bug 1
+## bug 1
 which I assumed caused by using binding name the same name as a cpp type
 
 *verdict: low prio*
