@@ -1,0 +1,7 @@
+(ns bermain.game
+  (:require
+   [bermain.bug1 :as bug1]))
+
+(defn -main [& args]
+  (println "hello jank" args)
+  (bug1/trigger))

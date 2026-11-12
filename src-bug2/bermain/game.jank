@@ -1,0 +1,18 @@
+(ns bermain.game
+  (:require
+   [bermain.bug2 :as bug2]))
+
+(defn -main [& args]
+  (println "hello jank" args)
+  (bug2/do-lib-stuff))
+
+;; [bermain@jank] jank compile for :bug-2
+;; [bermain@jank] [jank --module-path src-bug2;src -I src-cpp compile bermain.game -DSOME_HEADER_ONLY_CLIB_H_IMPL --name bug-jank -O3]
+;; ld.lld: error: duplicate symbol: do_some_c_stuff(float, float)
+;; >>> defined at src-cpp/some_header_only_clib.h:9
+;; >>>            target/_cache/x86_64-w64-windows-gnu-f68b3a81158adc55415f0bfacea84b2781feeb996c59321c0c7d44baab35f4bb/bermain/bug2.o
+;; >>> defined at target/_cache/x86_64-w64-windows-gnu-f68b3a81158adc55415f0bfacea84b2781feeb996c59321c0c7d44baab35f4bb/bermain/straylib.o
+;; ─ system/failure ───────────────────────────────────────────────────────────────────────────────────
+;; error: Clang failed with errors.
+;; warning: '-x none' after last input file has no effect
+;; error: linker command failed with exit code 1 (use -v to see invocation)

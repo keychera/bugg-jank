@@ -1,6 +1,7 @@
-{:paths ["src"]
- :jank {:include-dirs ["src-cpp"]
+{:jank {:include-dirs ["src-cpp"]
         :compile-out "bug-jank"}
- :aliases {:release  {:main bermain.game}
-           :repl-dev {:extra-paths ["src-dev"]
-                      :main bermain.dev}}}
+ :aliases {:default-main {:main bermain.game}
+           :bug-0 {:main bermain.bugg} ;; no bug here
+           :bug-1 {:extra-paths ["src-bug1"]}
+           :bug-2 {:jank-flags ["-DSOME_HEADER_ONLY_CLIB_H_IMPL"]
+                   :extra-paths ["src-bug2"]}}}
