@@ -8,7 +8,7 @@ small explanation about the tasks:
 - `bb jank` is a bb script that builds `jank run-main` command
 - `bb compile` is a bb script that builds `jank compile` command
 - both task receive `:bug` flag accepting integer, this will select which alias to use from deps.edn
-- running these task will print the jank command to be run
+- running these task will also print the jank command to be run, in case the jank command itself might be the faulty ones
 
 the detailed error is inside comments of one of the files in respective src folders
 ```sh
