@@ -26,7 +26,7 @@
   (-> deps-edn :argmap :main str))
 
 (defn ->flags [flag coll]
-  (into [] (mapcat (fn [entry] [flag entry])) coll))
+  (into [] (mapcat (fn [entry] [(str flag entry)])) coll))
 
 (def wherejank
   (try (edn/read-string (slurp "wherejank.edn"))
@@ -46,36 +46,32 @@
             [command main-module]
             extra)))))
 
-(defn clean [& _]
-  (log "cleaning target...")
-  (b/delete {:path target-dir}))
-
 (defn prep-basis [which-bug]
   (let [bug-key (keyword (str "bug-" which-bug))]
     (b/create-basis {:project "deps.edn" :aliases [:default-main bug-key]})))
 
 (defn jank
-  {:org.babashka/cli {:exec-args {:bug 0}
-                      :coerce {:bug :int}}}
+  {:org.babashka/cli {:exec-args {:bug 0} :coerce {:bug :int}}}
   [{which-bug :bug}]
-  (log (str "jank run-main for :bug-" which-bug))
   (let [base (prep-basis which-bug)
         jedn (->jank-deps-edn base)
         flag (-> base :argmap :jank-flags)
         jcmd (jank-command jedn "run-main" {:main-module (get-main-module base) :extra flag})]
-    (log (:argmap base))
-    (log jcmd)
+    (log (str "jank run-main for :bug-" which-bug))
+    (log "pseudo deps.edn with" (:argmap base))
+    (log "jank command:" jcmd)
     (b/process {:command-args jcmd})))
 
 (defn compile-jank
-  {:org.babashka/cli {:exec-args {:bug 0}
-                      :coerce {:bug :int}}}
+  {:org.babashka/cli {:exec-args {:bug 0} :coerce {:bug :int}}}
   [{which-bug :bug}]
-  (log (str "jank compile for :bug-" which-bug))
   (let [base (prep-basis which-bug)
         jedn (->jank-deps-edn base)
         jout (-> base :jank :compile-out)
         flag (-> base :argmap :jank-flags)
         jcmd (jank-command jedn "compile" {:main-module (get-main-module base) :extra (concat flag ["--name" jout "-O3"])})]
-    (log jcmd)
+
+    (log (str "jank compile for :bug-" which-bug))
+    (log "pseudo deps.edn with" (:argmap base))
+    (log "jank command:" jcmd)
     (b/process {:command-args jcmd})))

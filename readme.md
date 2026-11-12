@@ -4,7 +4,7 @@ need
 - babashka
 - jank from commit [3b7ffc220fb8c65eecf4e777bfcc8e5252d30fb3](https://github.com/jank-lang/jank/commit/3b7ffc220fb8c65eecf4e777bfcc8e5252d30fb3) , 
 
-the error is inside comments on inside respective game.jank files
+the detailed error is inside comments of one of the files in respective src folders
 ```sh
 bb jank
 
