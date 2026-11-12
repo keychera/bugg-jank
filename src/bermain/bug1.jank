@@ -1,0 +1,46 @@
+(ns bermain.bug1
+  (:include "extra.hpp"))
+
+(defn box-vec2 [x y]
+  (let [vec2 (cpp/new cpp/vec2 x y)]
+    (cpp/box vec2)))
+
+(defn mutate-vec2-fine! [^(:* cpp/vec2) avec2 x y]
+  (cpp/= (.-x avec2) x)
+  (cpp/= (.-y avec2) y))
+
+(defn mutate-vec2-ERROR!
+  ;; my assumption is that this is because the binding name is the same as the type name
+  [^(:* cpp/vec2) vec2 x y]
+  (cpp/= (.-x vec2) x)
+  (cpp/= (.-y vec2) y))
+
+(defn vec2->clj [^(:* cpp/vec2) avec2]
+  [(.-x avec2) (.-y avec2)])
+
+(defn trigger []
+  (let [avec2 (box-vec2 10.0 10.0)]
+    (println avec2)
+    (mutate-vec2-fine! avec2 42.0 42.0)
+    (println "is fine!" (vec2->clj avec2))
+    (mutate-vec2-ERROR! avec2 99.0 99.0)
+    (println "you will never see me" (vec2->clj avec2))))
+
+;; output:
+
+;; hello jank (1)
+;; #object [opaque_box 0x236a5143e00]
+;; is fine! [42.0 42.0]
+;; In file included from <<< inputs >>>:1:
+;; input_line_12:3:24: error: must use 'struct' tag to refer to type 'vec2' in this scope
+;;     3 | auto vec2{ static_cast<vec2*>(jank_unbox_with_source_c("vec2*", vec2_5.erase().raw(),
+;;       |                        ^
+;;       |                        struct
+;; input_line_12:3:6: note: struct 'vec2' is hidden by a non-type declaration of 'vec2' here
+;;     3 | auto vec2{ static_cast<vec2*>(jank_unbox_with_source_c("vec2*", vec2_5.erase().raw(),
+;;       |      ^
+;; error: Parsing failed.
+;; ─ codegen/internal-failure ─────────────────────────────────────────────────────────────────────────
+;; error: Unable to compile C++ source.
+;; 
+;; https://book.jank-lang.org/reference/error/codegen/internal-failure.html

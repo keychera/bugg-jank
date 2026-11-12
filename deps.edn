@@ -1,0 +1,6 @@
+{:paths ["src"]
+ :jank {:include-dirs ["src-cpp"]
+        :compile-out "bug-jank"}
+ :aliases {:release  {:main bermain.game}
+           :repl-dev {:extra-paths ["src-dev"]
+                      :main bermain.dev}}}
