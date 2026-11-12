@@ -8,6 +8,7 @@ small explanation about the tasks:
 - `bb jank` is a bb script that builds `jank run-main` command
 - `bb compile` is a bb script that builds `jank compile` command
 - both task receive `:bug` flag accepting integer, this will select which alias to use from deps.edn
+- running these task will print the jank command to be run
 
 the detailed error is inside comments of one of the files in respective src folders
 ```sh
@@ -17,6 +18,8 @@ bb jank :args bb-jank!
 bb jank :bug 1 # codegen error
 
 # bug 2, which I assume include extra.hpp twice makes the c header libs have double implementation
+# this was found because I was using this C header-only lib: https://github.com/prideout/par/blob/master/par_streamlines.h
+# and I tried to mimic the usage of that lib with this setup
 bb jank :bug 2 # this will work fine
 bb compile :bug 2 # this compiles error 
 ```
