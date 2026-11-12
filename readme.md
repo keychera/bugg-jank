@@ -1,5 +1,7 @@
 # buggy jank
 
+A project to repro bugs that I encounter, that may or may not be caused by me violating rules in the C/C++ land, or because of this setup, or maybe an actual jank bug.
+
 need 
 - babashka, at least v1.13.222
 - jank, at least from commit [3b7ffc220fb8c65eecf4e777bfcc8e5252d30fb3](https://github.com/jank-lang/jank/commit/3b7ffc220fb8c65eecf4e777bfcc8e5252d30fb3) 
@@ -36,6 +38,8 @@ bb compile :bug 2 # this compiles error
 
 ## bug 3
 this is still a bug, including once "fakeSDL.h" anywhere make run-main works, but not compile
+
+*verdict: need a doc update: [link to doc](https://book.jank-lang.org/cpp-interop/cpp-raw.html#:~:text=Note-,Unlike%20in%20C)*
 ```sh
 bb jank :bug 3 # this will work fine
 bb compile :bug 3 # this compiles error 
