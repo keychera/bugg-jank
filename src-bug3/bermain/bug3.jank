@@ -1,0 +1,8 @@
+(ns bermain.bug3
+  (:include "extra.hpp")
+  (:require
+   [bermain.straylib :as straylib]))
+
+(defn do-lib-stuff []
+  (println "wow, lib stuff!" (cpp/do_some_c_stuff 10.0 10.0))
+  (straylib/do-straylib-stuff))

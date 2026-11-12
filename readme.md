@@ -22,4 +22,10 @@ bb jank :bug 1 # codegen error
 # and I tried to mimic the usage of that lib with this setup
 bb jank :bug 2 # this will work fine
 bb compile :bug 2 # this compiles error 
+
+# bug 3 is the same as bug 2 codewise, but the extra.hpp is only included once in file bug3.jank
+# and this is also the same as bug 2, can be run with run-main, but not aot-compile (different error)
+# so it's a catch 22, and refactor the c/cpp sources is the only way out for bug-2 and bug-3
+bb jank :bug 3 # this will work fine
+bb compile :bug 3 # this compiles error 
 ```

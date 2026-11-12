@@ -1,0 +1,4 @@
+(ns bermain.straylib)
+
+(defn do-straylib-stuff []
+  (println "wow, straylib stuff!" (cpp/do_some_c_stuff 10.0 10.0)))

@@ -1,0 +1,15 @@
+(ns bermain.game
+  (:require
+   [bermain.bug3 :as bug3]))
+
+(defn -main [& args]
+  (println "hello jank" args)
+  (bug3/do-lib-stuff))
+
+;; [bermain@jank] jank run-main for :bug-3
+;; [bermain@jank] pseudo deps.edn with {:include-dirs [src-cpp], :compile-out bug-jank, :main-module bermain.game, :module-path src-bug3;src, :extras [-DSOME_HEADER_ONLY_CLIB_H_IMPL --name bug-jank -O3]}
+;; [bermain@jank] jank command: [jank --module-path src-bug3;src -Isrc-cpp -DSOME_HEADER_ONLY_CLIB_H_IMPL --name bug-jank -O3 compile bermain.game --]
+;; C:\Users\Kevin\Documents\projects\bugg-jank\src-bug3\bermain\straylib.jank:4:11: error: use of undeclared identifier 'do_some_c_stuff'
+;;     4 | auto &&v6(do_some_c_stuff(v3, v5));
+;;       |           ^~~~~~~~~~~~~~~
+;; 1 error generated.
