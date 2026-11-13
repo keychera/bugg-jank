@@ -2,8 +2,19 @@
         :compile-out "bug-jank"
         :main-module bermain.game}
  :aliases {:bug-0 {:jank {:main-module bermain.bugg}} ;; no bug here
+
            :bug-1 {:extra-paths ["src-bug1"]}
+
            :bug-2 {:jank {:extras ["-DSOME_HEADER_ONLY_CLIB_H_IMPL"]}
                    :extra-paths ["src-bug2"]}
+
            :bug-3 {:extra-paths ["src-bug3"]
-                   :jank {:main-module bermain.bug3}}}}
+                   :jank {:main-module bermain.bug3}}
+
+           :bug-4 {:extra-paths ["src-bug4/src-jank"]
+                   :jank {:main-module bermain.static
+                          :include-dirs ["src-bug4/include-c"]
+                          :library-dirs ["target/lib"]
+                          ;; from https://github.com/jank-lang/jank/blob/44eea86f7b44c6197d2ff4558929b0a857b11a10/compiler%2Bruntime/src/cpp/jank/jit/processor_dynamic.cpp#L801
+                          ;; If the lib starts with a colon, force static lib loading, by still try to find it
+                          :linked-libraries [":libhello.a"]}}}}

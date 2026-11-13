@@ -1,0 +1,6 @@
+(ns bermain.static
+  (:include "hello.h"))
+
+(defn -main [& _]
+  (println "hello!")
+  (cpp/hello))

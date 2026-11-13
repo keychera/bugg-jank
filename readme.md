@@ -44,3 +44,15 @@ this is still a bug, including once "fakeSDL.h" anywhere make run-main works, bu
 bb jank :bug 3 # this will work fine
 bb compile :bug 3 # this compiles error 
 ```
+
+
+# making static lib
+
+https://stackoverflow.com/a/71011994
+
+```sh
+clang -c -o target/lib/hello.o -Isrc-bug4/include-c src-bug4/src-c/hello.c
+ar rcs target/lib/libhello.a target/lib/hello.o
+clang src-bug4/another-src-c/consumer.c -Ltarget/lib/ -Isrc-bug4/include-c -lhello -o target/main
+```
+
