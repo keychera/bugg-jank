@@ -1,0 +1,12 @@
+(ns useatomic
+  (:include "atomic"))
+
+(cpp/raw "struct Pair { Pair(long a = 0, long b = 0): a(a), b(b) {}; long a, b;};")
+
+(defn -main [& _]
+  (let [pair (#cpp (cpp/std.atomic cpp/Pair) (cpp/Pair 1 2))
+        expe (cpp/Pair 1 2)
+        desi (cpp/Pair 5 6)
+        _    (.compare_exchange_strong pair expe desi)
+        res  (.load pair)]
+    (println "Janky Result! "(.-a res) (.-b res))))

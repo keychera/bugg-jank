@@ -45,6 +45,13 @@ bb jank :bug 3 # this will work fine
 bb compile :bug 3 # this compiles error 
 ```
 
+## bug 4
+
+something about static lib in windows msys-clang64 that produce .a files instead of .lib, still under investigations
+
+## bug 5
+
+instruction in the [src-bug5/README](src-bug5/readme.md)
 
 # making static lib
 
