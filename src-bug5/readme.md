@@ -77,7 +77,12 @@ jank --module-path src-jank --name jankatomic compile useatomic
 copying all the flags from ld invocation listed in clang --verbose
 ```
 jank --module-path src-jank \
--L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/lib -L/usr/lib \
+-L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/lib -L/usr/lib \
 -latomic --name jankatomic compile useatomic
 ```
 works! but why?
+
+shortened to this: verdict, jank doesn't yet search the same path as clang
+```sh
+jank --module-path src-jank -L/usr/lib/gcc/x86_64-linux-gnu/14 -latomic --name jankatomic compile useatomic
+```

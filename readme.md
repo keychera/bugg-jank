@@ -21,6 +21,8 @@ bb jank :args bb-jank! # just hello world
 which I assumed caused by using binding name the same name as a cpp type
 
 *verdict: low prio*
+https://github.com/jank-lang/jank/issues/1189 (closed as dupli of below)
+https://github.com/jank-lang/jank/issues/1186
 ```sh
 bb jank :bug 1 # codegen error
 ```
@@ -31,6 +33,17 @@ this was found because I was using this C header-only lib: https://github.com/pr
 and I tried to mimic the usage of that lib with this setup
 
 *verdict: not a bug: this kind of C header-only lib that has impl need special treatment*
+
+this is how we should do it. from [cute_headers](https://github.com/RandyGaul/cute_headers#faq)
+```c
+// Do this ONCE in a .c/.cpp file
+#define LIBNAME_IMPLEMENTATION
+#include "libname.h"
+
+// Everywhere else, just include like a typical header
+#include "libname.h"
+```
+
 ```sh
 bb jank :bug 2 # this will work fine
 bb compile :bug 2 # this compiles error 
@@ -40,6 +53,8 @@ bb compile :bug 2 # this compiles error
 this is still a bug, including once "fakeSDL.h" anywhere make run-main works, but not compile
 
 *verdict: need a doc update: [link to doc](https://book.jank-lang.org/cpp-interop/cpp-raw.html#:~:text=Note-,Unlike%20in%20C)*
+quote from jeaye:
+> So the path forward here is to better document the single translation unit of the JIT runtime vs the multi translation unit system of AOT.
 ```sh
 bb jank :bug 3 # this will work fine
 bb compile :bug 3 # this compiles error 
@@ -49,9 +64,13 @@ bb compile :bug 3 # this compiles error
 
 something about static lib in windows msys-clang64 that produce .a files instead of .lib, still under investigations
 
+hmm MSVC vs MSYS2 ?
+
 ## bug 5
 
 instruction in the [src-bug5/README](src-bug5/readme.md)
+
+is bug: jank doesn't search the same path as clang
 
 # making static lib
 
