@@ -60,25 +60,18 @@ bb jank :bug 3 # this will work fine
 bb compile :bug 3 # this compiles error 
 ```
 
+issue here: https://github.com/jank-lang/jank/issues/1201
+
 ## bug 4
 
-something about static lib in windows msys-clang64 that produce .a files instead of .lib, still under investigations
+instruction in the [src-bug4/README](src-bug4/readme.md)
 
-hmm MSVC vs MSYS2 ?
+my own patch that fixes my problem: https://github.com/keychera/jank/commit/cf6c891cda7155088483874cf6294617c2edc09b
 
 ## bug 5
 
 instruction in the [src-bug5/README](src-bug5/readme.md)
 
 is bug: jank doesn't search the same path as clang
-
-# making static lib
-
-https://stackoverflow.com/a/71011994
-
-```sh
-clang -c -o target/lib/hello.o -Isrc-bug4/include-c src-bug4/src-c/hello.c
-ar rcs target/lib/libhello.a target/lib/hello.o
-clang src-bug4/another-src-c/consumer.c -Ltarget/lib/ -Isrc-bug4/include-c -lhello -o target/main
-```
+fixed here: https://github.com/jank-lang/jank/issues/1204
 

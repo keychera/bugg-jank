@@ -3,6 +3,6 @@
 
 int main() {
   printf("Hello from consumer of libraries\n");
-  hello();
+  call_hello();
   return 0;
 }
